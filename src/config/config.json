@@ -1,0 +1,14 @@
+{
+    "services": {
+        "authService": {
+            "host": "localhost.com",
+            "protocol": "http",
+            "port": 8002
+        },
+        "userService": {
+            "host": "localhost.com",
+            "protocol": "http",
+            "port": 8001
+        }
+    }
+}
