@@ -11,4 +11,4 @@ class ServiceBuilder {
     }
 }
 
-module.exports = ServiceBuilder;
+export default ServiceBuilder;
