@@ -1,5 +1,5 @@
-const webService = require('./webService');
-const ServiceBuilder = require('./serviceBuilder');
+import webService from './webSerivce';
+import ServiceBuilder from './serviceBuilder';
 
 class AuthService extends ServiceBuilder {
     constructor() {
@@ -18,4 +18,4 @@ class AuthService extends ServiceBuilder {
     }
 }
 
-module.exports = AuthService;
+export default AuthService;

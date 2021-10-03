@@ -1,25 +1,38 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useEffect } from 'react';
+import { Loop } from '@mui/icons-material';
+import { Button } from '@mui/material';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { useSelector, useDispatch } from 'react-redux';
+import CssBaseline from '@mui/material/CssBaseline';
+import { getAuthStatus } from './store/appAction';
 import './App.css';
 
-function App() {
+const  App = () => {
+    const dispatch = useDispatch();
+    const { authenticationStatus } = useSelector((state) => state.auth);
+    const { palette } = useSelector((state) => state.theme);
+    const theme = createTheme({
+        palette
+    });
+
+    useEffect(() => {
+        console.log('Application has been mounted');
+        getAuthStatus(dispatch);
+    }, []);
+
+    const loadingScreen = () => {
+        return <Loop className="App-loader" color="primary" sx={{ fontSize: 200 }}/>;
+    }
+
     return (
-        <div className="App">
-            <header className="App-header">
-                <img src={logo} className="App-logo" alt="logo" />
-                <p>
-          Edit <code>src/App.js</code> and save to reload.
-                </p>
-                <a
-                    className="App-link"
-                    href="https://reactjs.org"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-          Learn React
-                </a>
-            </header>
-        </div>
+        <ThemeProvider  theme={theme}>
+            <CssBaseline />
+            <div className="App">
+                {authenticationStatus === 'UNKNOWN' ? 'Login' : loadingScreen()}
+                <Button variant="outlined">Outlined</Button>
+            </div>
+        </ThemeProvider>
+        
     );
 }
 

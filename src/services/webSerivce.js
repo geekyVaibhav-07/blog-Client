@@ -34,4 +34,4 @@ const webService = async (params) => {
     });
 }
 
-module.exports = webService;
+export default webService;

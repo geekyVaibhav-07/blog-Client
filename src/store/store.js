@@ -1,14 +1,22 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import constants from '@geekcorp/constants';
+import constants from './../constants/constants';
+import Palette from '../themes/Palette';
+
+const palette = new Palette();
 
 const authReducer = (state = {}, action = {}) => {
     switch (action.type) {
     case constants.USER_AUTHENTICATED:
         return {
             ...state,
-            ...action.payload,
+            authenticationStatus: action.type
+        };
+    case constants.AUTHTOKEN_ERROR:
+        return {
+            ...state,
+            authenticationStatus: action.type
         };
     default:
         return state
@@ -27,18 +35,34 @@ const profileReducer = (state = {}, action = {}) => {
     }
 };
 
+const themeReducer = (state = {}, action = {}) => {
+    switch (action.type) {
+    case constants.UPDATE_PALETTE:
+        return {
+            ...state,
+            ...action.payload,
+        };
+    default:
+        return state
+    }
+}
+
 const initialState = {
     auth: {
-        authenticated: false
+        authenticationStatus: 'UNKNOWN'
     },
     profile: {},
+    theme: {
+        palette: palette
+    }
 }
 
 const composedEnhancer = composeWithDevTools(applyMiddleware(thunkMiddleware))
 
 const rootReducer = combineReducers({
     profile: profileReducer,
-    auth: authReducer
+    auth: authReducer,
+    theme: themeReducer
 });
 
 const store = createStore(rootReducer, initialState, composedEnhancer);
