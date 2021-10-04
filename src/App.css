@@ -1,11 +1,5 @@
 .App {
   text-align: center;
-
-}
-
-.App-loader {
-  margin-top: calc(50vh - 100px);
-  animation: spinner infinite 2s linear;
 }
 
 @keyframes spinner {
