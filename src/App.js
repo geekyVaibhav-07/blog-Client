@@ -4,7 +4,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import CssBaseline from '@mui/material/CssBaseline';
 import { getAuthStatus } from './store/appAction';
 import Loader from './components/loader/loader';
+import constants from './constants/constants';
 import './App.css';
+import Login from './components/login/Login';
 
 const  App = () => {
     const dispatch = useDispatch();
@@ -16,12 +18,18 @@ const  App = () => {
 
     useEffect(() => {
         console.log('Application has been mounted');
-        getAuthStatus(dispatch);
+        dispatch(getAuthStatus());
     }, []);
 
     const loadingScreen = () => {
         return (
-            <Loader open={authenticationStatus !== 'UNKNOWN'} />
+            <Loader open={authenticationStatus === 'UNKNOWN'} />
+        )
+    }
+
+    const signupScreen = () => {
+        return (
+            <Login />
         )
     }
 
@@ -30,6 +38,7 @@ const  App = () => {
             <CssBaseline />
             <div className="App">
                 {loadingScreen()}
+                {authenticationStatus === constants.AUTHTOKEN_ERROR ? signupScreen() : null}
             </div>
         </ThemeProvider>
         

@@ -14,7 +14,8 @@
     "globals": {
         "Math": true,
         "require": true,
-        "module": true
+        "module": true,
+        "exports": true
     },
     "rules": {
         "react/prop-types": 0,

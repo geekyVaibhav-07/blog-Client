@@ -1,10 +1,15 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux';
-import thunkMiddleware from 'redux-thunk';
-import { composeWithDevTools } from 'redux-devtools-extension';
+import thunk from 'redux-thunk';
 import constants from './../constants/constants';
 import Palette from '../themes/Palette';
+import { getItem, setItem } from '../services/localStorage';
 
-const palette = new Palette();
+const getPaletteFromLocalStorage = getItem('palette');
+const palette = getPaletteFromLocalStorage || new Palette('dark');
+if(!getPaletteFromLocalStorage) {
+    console.log('palette not found');
+    setItem('palette', palette)
+}
 
 const authReducer = (state = {}, action = {}) => {
     switch (action.type) {
@@ -47,6 +52,18 @@ const themeReducer = (state = {}, action = {}) => {
     }
 }
 
+const formFieldReducer = (state = {}, action = {}) => {
+    switch (action.type) {
+    case constants.UPDATE_FIELD:
+        return {
+            ...state,
+            ...action.payload,
+        };
+    default:
+        return state
+    }
+}
+
 const initialState = {
     auth: {
         authenticationStatus: 'UNKNOWN'
@@ -54,17 +71,17 @@ const initialState = {
     profile: {},
     theme: {
         palette: palette
-    }
+    },
+    formFields: {}
 }
-
-const composedEnhancer = composeWithDevTools(applyMiddleware(thunkMiddleware))
 
 const rootReducer = combineReducers({
     profile: profileReducer,
     auth: authReducer,
-    theme: themeReducer
+    theme: themeReducer,
+    formFields: formFieldReducer
 });
 
-const store = createStore(rootReducer, initialState, composedEnhancer);
+const store = createStore(rootReducer, initialState, applyMiddleware(thunk));
 
 export default store;
