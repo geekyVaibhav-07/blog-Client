@@ -1,0 +1,64 @@
+{
+    "email":{
+       "fieldId":"email",
+       "name":"email",
+       "label":"email",
+       "type":"text",
+       "errorValidatos":[
+          {
+             "type":"required"
+          },
+          {
+             "type":"regex",
+             "reference": "emailRegEx"
+          }
+       ],
+       "touched":false,
+       "errors":[
+          
+       ],
+       "value":"",
+       "onFoucs":[
+          
+       ],
+       "onBlur":[
+          
+       ],
+       "onChange":[
+          "updateAndValidateField"
+       ],
+       "additionalHTMLInputAttributes":{
+          "autoComplete":"email",
+          "id":"email"
+       }
+    },
+    "password":{
+       "fieldId":"password",
+       "label":"password",
+       "type":"password",
+       "name":"password",
+       "errorValidatos":[
+          {
+             "type":"required"
+          }
+       ],
+       "touched":false,
+       "errors":[
+          
+       ],
+       "value":"",
+       "onFoucs":[
+          
+       ],
+       "onBlur":[
+          
+       ],
+       "onChange":[
+          
+       ],
+       "additionalHTMLInputAttributes":{
+          "autoomplete":"password",
+          "id":"password"
+       }
+    }
+ }

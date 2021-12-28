@@ -1,6 +1,5 @@
 const localStorage = window.localStorage;
 exports.getItem = (key) => {
-    console.log(JSON.parse(localStorage.getItem(key)));
     return JSON.parse(localStorage.getItem(key));
 }
 

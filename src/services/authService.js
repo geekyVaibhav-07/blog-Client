@@ -16,6 +16,18 @@ class AuthService extends ServiceBuilder {
         });
         return response;
     }
+
+    async login(data) {
+        const url = `${this.serviceAddress}/login`;
+        const method = 'POST';
+
+        const response =  await webService({
+            url,
+            method,
+            data
+        });
+        return response;
+    }
 }
 
 export default AuthService;

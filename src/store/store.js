@@ -1,8 +1,13 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux';
+import { composeWithDevTools } from 'redux-devtools-extension'
 import thunk from 'redux-thunk';
 import constants from './../constants/constants';
 import Palette from '../themes/Palette';
 import { getItem, setItem } from '../services/localStorage';
+import formFieldReducer from './reducers/formFieldReducer';
+import themeReducer from './reducers/themeReducer';
+import profileReducer from './reducers/profileReducer';
+import appReducer from './reducers/appReducer';
 
 const getPaletteFromLocalStorage = getItem('palette');
 const palette = getPaletteFromLocalStorage || new Palette('dark');
@@ -28,42 +33,6 @@ const authReducer = (state = {}, action = {}) => {
     }
 };
 
-const profileReducer = (state = {}, action = {}) => {
-    switch (action.type) {
-    case constants.USER_AUTHENTICATED:
-        return {
-            ...state,
-            ...action.payload,
-        };
-    default:
-        return state
-    }
-};
-
-const themeReducer = (state = {}, action = {}) => {
-    switch (action.type) {
-    case constants.UPDATE_PALETTE:
-        return {
-            ...state,
-            ...action.payload,
-        };
-    default:
-        return state
-    }
-}
-
-const formFieldReducer = (state = {}, action = {}) => {
-    switch (action.type) {
-    case constants.UPDATE_FIELD:
-        return {
-            ...state,
-            ...action.payload,
-        };
-    default:
-        return state
-    }
-}
-
 const initialState = {
     auth: {
         authenticationStatus: 'UNKNOWN'
@@ -72,16 +41,22 @@ const initialState = {
     theme: {
         palette: palette
     },
-    formFields: {}
+    formFields: {},
+    appState: {
+        busy: true
+    }
 }
 
 const rootReducer = combineReducers({
     profile: profileReducer,
     auth: authReducer,
     theme: themeReducer,
-    formFields: formFieldReducer
+    formFields: formFieldReducer,
+    appState: appReducer,
 });
 
-const store = createStore(rootReducer, initialState, applyMiddleware(thunk));
+const composedEnhancer = composeWithDevTools(applyMiddleware(thunk))
+
+const store = createStore(rootReducer, initialState, composedEnhancer);
 
 export default store;

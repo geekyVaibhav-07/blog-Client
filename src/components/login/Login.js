@@ -1,15 +1,18 @@
 import React from 'react';
-import { Button } from '@mui/material';
 import { Box } from '@mui/system';
-import InputWrapper from '../inputWrapper/InputWrapper';
+import ButtonWrapper from '../buttonWrapper/ButtonWrapper';
+import InputFieldWrapper from '../inputFieldWrapper/InputFieldWrapper';
 
 const Login = () => {
-
+    const loginDataMap = {
+        email: 'email',
+        password: 'password'
+    }
     return (
-        <Box sx={{ display: 'grid' }}>
-            <InputWrapper label="Username" variant="outlined" />
-            <InputWrapper label="Password" variant="outlined" />
-            <Button variant="outlined">Login</Button>
+        <Box className='login-grid'>
+            <InputFieldWrapper fieldId="email" variant="outlined" />
+            <InputFieldWrapper fieldId="password" variant="outlined"/>
+            <ButtonWrapper action='login' dataMap={loginDataMap} className='primary-button' variant="contained" text='Login' styleOverride={{ marginLeft: '50%', transform: 'translate(-50%, 0)' }}/>
         </Box>
     )
 }

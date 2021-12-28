@@ -2,6 +2,21 @@
   text-align: center;
 }
 
+.login-grid {
+  display: grid;
+  gap: 1rem;
+  justify-content: center;
+  align-content: center;
+  height: 100vh;
+}
+.input-field {
+  width: 300px
+}
+.primary-button {
+  width: 150px;
+  margin: 1rem
+}
+
 @keyframes spinner {
   from {
     transform: rotate(0deg);
