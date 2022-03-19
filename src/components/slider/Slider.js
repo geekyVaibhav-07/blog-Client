@@ -10,10 +10,19 @@ const Slider = (props) => {
     const toggleThemePan = () => {
         if (exploreStatus) {
             toggleExploredStatus(false);
+
+            /**
+             * Child components should be unmounted at the end of the animation
+             * the delay has been choosen based on the animation time from css file
+             */
             setTimeout(() => toggleMountStaus(false), 500);
         }
         else {
             toggleExploredStatus(true);
+            
+            /**
+             * Child components should be mounted at the begining of the animation
+             */
             toggleMountStaus(true);
         }
     }
