@@ -7,6 +7,9 @@ class Palette extends ColorSchema {
         if (mode === 'light' || mode === 'dark') {  
             this.mode = mode;
         }
+        else {
+            this.mode = 'light';
+        }
     }
 
     setMode(mode) {
@@ -14,7 +17,7 @@ class Palette extends ColorSchema {
             this.mode = mode;
         }
         else {
-            this.mode = undefined;
+            this.mode = 'light';
         }
     }
 }

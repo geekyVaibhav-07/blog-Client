@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { useSelector, useDispatch } from 'react-redux';
 import CssBaseline from '@mui/material/CssBaseline';
 import { getAuthStatus } from './store/actions/appActions';
@@ -9,15 +8,14 @@ import constants from './constants/constants';
 import './App.css';
 import Login from './components/login/Login';
 import viewConfig from './viewConfigs';
+import Theme from './themes/Theme';
+import ThemeSelector from './components/theme/ThemeSelector';
+import Slider from './components/slider/Slider';
 
 const  App = () => {
     const dispatch = useDispatch();
     const { authenticationStatus } = useSelector((state) => state.auth);
-    const { palette } = useSelector((state) => state.theme);
     const { busy } = useSelector((state) => state.appState);
-    const theme = createTheme({
-        palette
-    });
 
     const intiateState = (state) => {
         dispatch(fieldActions.initiateFormFieldState(state))
@@ -42,13 +40,16 @@ const  App = () => {
     }
 
     return (
-        <ThemeProvider  theme={theme}>
+        <Theme>
             <CssBaseline />
             <div className="App">
+                <Slider>
+                    <ThemeSelector />
+                </Slider>
                 {loadingScreen()}
                 {authenticationStatus === constants.AUTHTOKEN_ERROR ? signupScreen() : null}
             </div>
-        </ThemeProvider>
+        </Theme>
         
     );
 }
