@@ -4,15 +4,23 @@ import SvgWrapper from '../svg/SvgWrapper';
 import './slider.css';
 
 const Slider = (props) => {
-    const [ isExplored, toggleExploredStatus ] = useState(false);
+    const [ exploreStatus, toggleExploredStatus ] = useState(false);
+    const [ mountStaus, toggleMountStaus ] = useState(false);
     
     const toggleThemePan = () => {
-        isExplored ? toggleExploredStatus(false) : toggleExploredStatus(true);
+        if (exploreStatus) {
+            toggleExploredStatus(false);
+            setTimeout(() => toggleMountStaus(false), 500);
+        }
+        else {
+            toggleExploredStatus(true);
+            toggleMountStaus(true);
+        }
     }
 
     const getPanStyle = () => {
         let style = 'slider';
-        if (isExplored) {
+        if (exploreStatus) {
             style+= ' explored';
             return style;
         }
@@ -20,15 +28,15 @@ const Slider = (props) => {
         return style;
     }
 
-    const renderChildren = (isExplored) => {
-        if (isExplored) {
+    const renderChildren = (exploreStatus) => {
+        if (exploreStatus) {
             return props.children;
         }
         return null;
     }
 
-    const explorer = (isExplored) => {
-        if (isExplored) {
+    const explorer = (exploreStatus) => {
+        if (exploreStatus) {
             return (
                 <div className='slider-explorer-wrapper'>
                     <SvgWrapper width='50px' height='30px' name='arrow' onClick={toggleThemePan} />
@@ -39,12 +47,12 @@ const Slider = (props) => {
     }
 
     return (
-        <Card  variant="outlined" className={getPanStyle()} onClick={isExplored ? () => {} : toggleThemePan}>
+        <Card  variant="outlined" className={getPanStyle()} onClick={exploreStatus ? () => {} : toggleThemePan}>
             <Card className='slider-children left'>
-                {explorer(isExplored)}
+                {explorer(mountStaus)}
             </Card>
             <Card  className='slider-children right' variant="outlined">
-                {renderChildren(isExplored)}
+                {renderChildren(mountStaus)}
             </Card>
         </Card>
     )
