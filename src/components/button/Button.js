@@ -11,7 +11,7 @@ const Button = (props = {}) => {
         className='',
         ...restProps
     } = props;
-    
+
     return (
         <MUIButton
             {...restProps}

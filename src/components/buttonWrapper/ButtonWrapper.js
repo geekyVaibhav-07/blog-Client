@@ -1,5 +1,5 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import Button from '../button/Button';
 import { ajaxSubmit } from '../../store/actions/appActions';
 
@@ -9,8 +9,12 @@ const ButtonWrapper = (props) => {
         href='',
         dataMap = {},
         validation = true,
+        text='',
         ...restProps
     } = props;
+
+    const translator = useSelector(state => state.locale);
+    const buttonText = translator.getContent(text);
 
     const dispatch = useDispatch();
 
@@ -27,6 +31,7 @@ const ButtonWrapper = (props) => {
     return (
         <Button
             {...restProps}
+            text={buttonText}
             onClick={onClick}
         />
     )

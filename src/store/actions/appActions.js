@@ -22,6 +22,7 @@ const resolveDataMap = (dataMap, state={}) => {
 
 const getAuthStatus = () => {
     return async function(dispatch) {
+        dispatch(setAppBusy())
         try {
             const response = await authService.isAuthenticated();
             if (response && response.statusCode === 200 ) {
