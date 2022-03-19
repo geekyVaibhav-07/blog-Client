@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Palette from '../../themes/Palette';
 import constants from '../../constants/constants';
-import { Avatar, Select, FormHelperText, MenuItem, InputLabel } from '@mui/material';
+import { Avatar, Select, MenuItem, InputLabel } from '@mui/material';
 
 const ThemeSelector = () => {
     const dispatch = useDispatch();
@@ -37,7 +37,6 @@ const ThemeSelector = () => {
                 <MenuItem value='dark'>{darkAvatar}</MenuItem>
                 <MenuItem value='light'>{lightAvatar}</MenuItem>
             </Select>
-            <FormHelperText>Theme</FormHelperText>
         </>
     )
 }
