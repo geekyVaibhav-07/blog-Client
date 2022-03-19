@@ -5,7 +5,7 @@ const appReducer = (state = {}, action = {}) => {
     case constants.UPDATE_BUSY_STATE:
         return {
             ...state,
-            busy: action.payload
+            busy: action.payload ? state.busy + 1 : state.busy - 1
         };
     default:
         return state

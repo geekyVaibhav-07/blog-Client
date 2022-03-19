@@ -1,0 +1,9 @@
+{
+    "emailLabel": "Email",
+    "passwordLabel": "Password",
+    "themeLabel": "Theme",
+    "lightThemeLabel": "L",
+    "darkThemeLabel": "D",
+    "submitLabel": "Submit",
+    "loginLabel": "Login"
+}

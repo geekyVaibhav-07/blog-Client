@@ -12,7 +12,7 @@ const Login = () => {
         <Box className='login-grid'>
             <InputFieldWrapper fieldId="email" variant="outlined" />
             <InputFieldWrapper fieldId="password" variant="outlined"/>
-            <ButtonWrapper action='login' dataMap={loginDataMap} className='primary-button' variant="contained" text='Login' styleOverride={{ marginLeft: '50%', transform: 'translate(-50%, 0)' }}/>
+            <ButtonWrapper action='login' dataMap={loginDataMap} className='primary-button' variant="contained" text='loginLabel' styleOverride={{ marginLeft: '50%', transform: 'translate(-50%, 0)' }}/>
         </Box>
     )
 }

@@ -7,6 +7,7 @@ import { Avatar, Select, MenuItem, InputLabel } from '@mui/material';
 const ThemeSelector = () => {
     const dispatch = useDispatch();
     const { palette } = useSelector((state) => state.theme);
+    const translator = useSelector((state) => state.locale);
 
     const handleClick = (e) => {
         e.preventDefault();
@@ -21,8 +22,8 @@ const ThemeSelector = () => {
     };
 
     const mode = palette.mode;
-    const lightAvatar = <Avatar name = 'light' variant="square" sx={{ color: 'primary.light', bgcolor: 'white' }}>L</Avatar>;
-    const darkAvatar =  <Avatar name = 'dark' variant="square" sx={{  color: 'primary.dark', bgcolor: 'black' }}>D</Avatar>;
+    const lightAvatar = <Avatar name = 'light' variant="square" sx={{ color: 'primary.light', bgcolor: 'white' }}>{translator.getContent('lightThemeLabel')}</Avatar>;
+    const darkAvatar =  <Avatar name = 'dark' variant="square" sx={{  color: 'primary.dark', bgcolor: 'black' }}>{translator.getContent('darkThemeLabel')}</Avatar>;
 
     return (
         <>
@@ -31,7 +32,7 @@ const ThemeSelector = () => {
                 labelId="theme-selector-label"
                 id="demo-simple-select"
                 value={mode}
-                label="Theme"
+                label={translator.getContent('Theme')}
                 onChange={handleClick}
             >
                 <MenuItem value='dark'>{darkAvatar}</MenuItem>

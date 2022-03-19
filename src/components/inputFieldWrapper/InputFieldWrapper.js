@@ -6,7 +6,7 @@ import actionConfigurators from './../../store/utils/actionConfigurators';
 const InputFieldWrapper = (props) => {
 
     const {
-        fieldId='',
+        fieldId=''
     } = props;
 
     const fieldState = useSelector(state => {
@@ -16,15 +16,20 @@ const InputFieldWrapper = (props) => {
     const {
         onChane=[],
         onBlur=[],
-        onFocus=[]
+        onFocus=[],
+        label=''
     } = fieldState;
+
+    const translator = useSelector(state => state.locale);
+    const labelText = translator.getContent(label);
     
     const dispatch = useDispatch();
     const actions = useCallback(actionConfigurators(fieldState, dispatch), [ ...onChane, ...onBlur, ...onFocus ]);
 
     const newProps = {
         ...props,
-        ...fieldState
+        ...fieldState,
+        label: labelText
     };
 
     return (

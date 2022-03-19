@@ -2,7 +2,7 @@
     "email":{
        "fieldId":"email",
        "name":"email",
-       "label":"email",
+       "label":"emailLabel",
        "type":"text",
        "errorValidatos":[
           {
@@ -34,7 +34,7 @@
     },
     "password":{
        "fieldId":"password",
-       "label":"password",
+       "label":"passwordLabel",
        "type":"password",
        "name":"password",
        "errorValidatos":[

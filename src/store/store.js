@@ -8,6 +8,7 @@ import formFieldReducer from './reducers/formFieldReducer';
 import themeReducer from './reducers/themeReducer';
 import profileReducer from './reducers/profileReducer';
 import appReducer from './reducers/appReducer';
+import localeReducer from './reducers/localeReducer';
 
 const getPaletteFromLocalStorage = getItem('palette');
 const palette = getPaletteFromLocalStorage || new Palette('dark');
@@ -43,7 +44,11 @@ const initialState = {
     },
     formFields: {},
     appState: {
-        busy: true
+        busy: 0
+    },
+    locale: {
+        locale: undefined,
+        getContent: undefined
     }
 }
 
@@ -53,6 +58,7 @@ const rootReducer = combineReducers({
     theme: themeReducer,
     formFields: formFieldReducer,
     appState: appReducer,
+    locale: localeReducer
 });
 
 const composedEnhancer = composeWithDevTools(applyMiddleware(thunk))
