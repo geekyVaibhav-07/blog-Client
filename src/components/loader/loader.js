@@ -1,6 +1,7 @@
 import React from 'react';
 import { Modal } from '@mui/material';
 import { Loop } from '@mui/icons-material';
+import './loader.css';
 
 const defaultWrapperStyle = {
     position: 'absolute',
