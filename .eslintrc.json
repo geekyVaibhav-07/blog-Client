@@ -32,7 +32,9 @@
         "computed-property-spacing": ["error", "never"],
         "key-spacing": "error",
         "object-curly-spacing": ["error", "always"],
-        "indent": ["error", 4],
+        "indent": [2, "tab", { 
+            "ignoredNodes": ["TemplateLiteral"] 
+          }],
         "prefer-const": "warn",
         "no-dupe-else-if": "error",
         "brace-style": [2, "stroustrup", { "allowSingleLine": true }],

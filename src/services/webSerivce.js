@@ -7,31 +7,31 @@ const axios = require('axios');
  */
 
 const presetHeaders = {
-    'Content-Type': 'application/json',
-    'request-origin': 'clientApp',
+	'Content-Type': 'application/json',
+	'request-origin': 'clientApp',
 };
 
 const webService = async (params) => {
-    const {
-        method = 'GET',
-        url,
-        data = {},
-        headers = {},
-        cookies = {}
-    } = params;
+	const {
+		method = 'GET',
+		url,
+		data = {},
+		headers = {},
+		cookies = {}
+	} = params;
 
-    const headersToBeSent = {
-        ...presetHeaders,
-        ...headers,
-    };
+	const headersToBeSent = {
+		...presetHeaders,
+		...headers,
+	};
 
-    return await axios({
-        method,
-        url,
-        data,
-        cookies,
-        headers: headersToBeSent,
-    });
+	return await axios({
+		method,
+		url,
+		data,
+		cookies,
+		headers: headersToBeSent,
+	});
 }
 
 export default webService;
