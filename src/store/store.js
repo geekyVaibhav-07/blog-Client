@@ -13,52 +13,52 @@ import localeReducer from './reducers/localeReducer';
 const getPaletteFromLocalStorage = getItem('palette');
 const palette = getPaletteFromLocalStorage || new Palette('dark');
 if(!getPaletteFromLocalStorage) {
-	console.log('palette not found');
-	setItem('palette', palette)
+    console.log('palette not found');
+    setItem('palette', palette)
 }
 
 const authReducer = (state = {}, action = {}) => {
-	switch (action.type) {
-	case constants.USER_AUTHENTICATED:
-		return {
-			...state,
-			authenticationStatus: action.type
-		};
-	case constants.AUTHTOKEN_ERROR:
-		return {
-			...state,
-			authenticationStatus: action.type
-		};
-	default:
-		return state
-	}
+    switch (action.type) {
+    case constants.USER_AUTHENTICATED:
+        return {
+            ...state,
+            authenticationStatus: action.type
+        };
+    case constants.AUTHTOKEN_ERROR:
+        return {
+            ...state,
+            authenticationStatus: action.type
+        };
+    default:
+        return state
+    }
 };
 
 const initialState = {
-	auth: {
-		authenticationStatus: 'UNKNOWN'
-	},
-	profile: {},
-	theme: {
-		palette: palette
-	},
-	formFields: {},
-	appState: {
-		busy: 0
-	},
-	locale: {
-		locale: undefined,
-		getContent: undefined
-	}
+    auth: {
+        authenticationStatus: 'UNKNOWN'
+    },
+    profile: {},
+    theme: {
+        palette: palette
+    },
+    formFields: {},
+    appState: {
+        busy: 0
+    },
+    locale: {
+        locale: undefined,
+        getContent: undefined
+    }
 }
 
 const rootReducer = combineReducers({
-	profile: profileReducer,
-	auth: authReducer,
-	theme: themeReducer,
-	formFields: formFieldReducer,
-	appState: appReducer,
-	locale: localeReducer
+    profile: profileReducer,
+    auth: authReducer,
+    theme: themeReducer,
+    formFields: formFieldReducer,
+    appState: appReducer,
+    locale: localeReducer
 });
 
 const composedEnhancer = composeWithDevTools(applyMiddleware(thunk))
