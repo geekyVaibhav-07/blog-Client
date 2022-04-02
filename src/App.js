@@ -14,56 +14,56 @@ import ThemeSelector from './components/theme/ThemeSelector';
 import Slider from './components/slider/Slider';
 
 const  App = () => {
-	const dispatch = useDispatch();
-	const { authenticationStatus } = useSelector((state) => state.auth);
-	const { locale } = useSelector((state) => state.locale);
-	const { busy } = useSelector((state) => state.appState);
+    const dispatch = useDispatch();
+    const { authenticationStatus } = useSelector((state) => state.auth);
+    const { locale } = useSelector((state) => state.locale);
+    const { busy } = useSelector((state) => state.appState);
 
-	const intiateState = (state) => {
-		dispatch(fieldActions.initiateFormFieldState(state))
-	}
+    const intiateState = (state) => {
+        dispatch(fieldActions.initiateFormFieldState(state))
+    }
 
-	useEffect(() => {
-		console.log('Application has been mounted');
-		dispatch(localeActions.updateLocale('en'));
-		dispatch(getAuthStatus());
-	}, []);
+    useEffect(() => {
+        console.log('Application has been mounted');
+        dispatch(localeActions.updateLocale('en'));
+        dispatch(getAuthStatus());
+    }, []);
 
-	const loadingScreen = () => {
-		return (
-			<Loader open={busy ? true : false} />
-		)
-	}
+    const loadingScreen = () => {
+        return (
+            <Loader open={busy ? true : false} />
+        )
+    }
 
-	const signupScreen = () => {
-		intiateState(viewConfig.login);
-		return (
-			<Login />
-		)
-	}
+    const signupScreen = () => {
+        intiateState(viewConfig.login);
+        return (
+            <Login />
+        )
+    }
 
-	const renderMainApp = () => {
-		if (locale) {
-			if (authenticationStatus === constants.AUTHTOKEN_ERROR) {
-				return signupScreen();
-			}
-		}
-		return null;
-	}
+    const renderMainApp = () => {
+        if (locale) {
+            if (authenticationStatus === constants.AUTHTOKEN_ERROR) {
+                return signupScreen();
+            }
+        }
+        return null;
+    }
 
-	return (
-		<Theme>
-			<CssBaseline />
-			<div className="App">
-				<Slider>
-					<ThemeSelector />
-				</Slider>
-				{loadingScreen()}
-				{renderMainApp()}
-			</div>
-		</Theme>
+    return (
+        <Theme>
+            <CssBaseline />
+            <div className="App">
+                <Slider>
+                    <ThemeSelector />
+                </Slider>
+                {loadingScreen()}
+                {renderMainApp()}
+            </div>
+        </Theme>
         
-	);
+    );
 }
 
 export default App;
